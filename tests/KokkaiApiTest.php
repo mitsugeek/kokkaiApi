@@ -153,4 +153,20 @@ class KokkaiApiTest extends TestCase
 
     }
 
+
+
+    public function testNameOfHouse(): void
+    {
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setNameOfHouse(KokkaiApi::NAME_OF_HOUSE_REPRESENTAIVES);
+        $this->assertEquals(KokkaiApi::NAME_OF_HOUSE_REPRESENTAIVES, $api->getNameOfHouse());
+
+        $api->setNameOfHouse(KokkaiApi::NAME_OF_HOUSE_COUNCILORS);
+        $this->assertEquals(KokkaiApi::NAME_OF_HOUSE_COUNCILORS, $api->getNameOfHouse());
+
+        $api->setNameOfHouse(KokkaiApi::NAME_OF_HOUSE_BOTH);
+        $this->assertEquals(KokkaiApi::NAME_OF_HOUSE_BOTH, $api->getNameOfHouse());
+
+    }
+
 }

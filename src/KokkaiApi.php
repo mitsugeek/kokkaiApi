@@ -3,8 +3,19 @@ namespace mitsugeek;
 
 class KokkaiApi
 {
+    /**
+     * APIの種類:会議単位簡易出力
+     */
     public const API_MEETING_LIST = "meeting_list";
+
+    /**
+     * APIの種類:会議単位出力
+     */
     public const API_MEETING = "meeting";
+
+    /**
+     * APIの種類:発言単位出力
+     */
     public const API_SPEACH = "speech";
 
     /**
@@ -45,6 +56,8 @@ class KokkaiApi
         }
     }
     
+
+
 
     /**
      * 開始位置
@@ -98,11 +111,51 @@ class KokkaiApi
             }
         }
     }
+
+    /**
+     * 院名:衆議院
+     */
+    public const NAME_OF_HOUSE_REPRESENTAIVES = "衆議院";
+
+    /**
+     * 院名:参議院
+     */
+    public const NAME_OF_HOUSE_COUNCILORS = "参議院";
+
+    /**
+     * 院名:両院
+     */
+    public const NAME_OF_HOUSE_BOTH = "両院";
+
+    /**
+     * 	院名
+     */
+    private string $nameOfHouse = "";
+
+    /**
+     * 院名(get)
+     */
+    public function getNameOfHouse(){
+        return $this->nameOfHouse;
+    }
+    
+    /**
+     * 院名(set)
+     */
+    public function setNameOfHouse(string $nameOfHouse){
+        $this->nameOfHouse = $nameOfHouse;
+    }
+
+
+
+
     
 
 
 
-    
+    /**
+     * コンストラクタ
+     */
     public function __construct($api)
     {
         $this->setApi($api);
