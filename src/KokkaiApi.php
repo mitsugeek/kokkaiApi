@@ -82,14 +82,14 @@ class KokkaiApi
      * 一回の最大取得件数(set)
      */
     public function setMaximumRecords(int $maximumRecords){
-        if($this->getApi() === self::API_MEETING || $this->getApi() === self::API_MEETING_LIST){
+        if($this->getApi() === self::API_SPEACH || $this->getApi() === self::API_MEETING_LIST){
             if(1 <= $maximumRecords && $maximumRecords <= 100){        
                 $this->maximumRecords = $maximumRecords;
             } else {
                 //error
                 throw new \Exception('$maximumRecords is 1 ~ 100');
             }
-        } else if($this->getApi() === self::API_SPEACH){
+        } else if($this->getApi() === self::API_MEETING){
             if(1 <= $maximumRecords && $maximumRecords <= 10){        
                 $this->maximumRecords = $maximumRecords;
             } else {

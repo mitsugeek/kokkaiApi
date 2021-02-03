@@ -34,6 +34,7 @@ class KokkaiApiTest extends TestCase
 
     /**
      * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議発言単位出力：境界値チェック
      */
     public function testSetMaximumRecordsBySpeach(): void
     {
@@ -42,38 +43,79 @@ class KokkaiApiTest extends TestCase
         $this->assertEquals(1, $api->getMaximumRecords());
 
         
-        $api->setMaximumRecords(10);
-        $this->assertEquals(10, $api->getMaximumRecords());
-
-        $this->expectException(Exception::class);
-        $api = new KokkaiApi(KokkaiApi::API_SPEACH);
-        $api->setMaximumRecords(11);
-        $this->assertEquals(11, $api->getMaximumRecords());
+        $api->setMaximumRecords(100);
+        $this->assertEquals(100, $api->getMaximumRecords());
     }
-
 
     /**
      * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位出力：境界値チェック
+     */
+    public function testSetMaximumRecordsBySpeachException1(): void
+    {
+
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_SPEACH);
+        $api->setMaximumRecords(101);
+
+    }
+
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議発言単位出力：境界値チェック
+     */
+    public function testSetMaximumRecordsBySpeachException2(): void
+    {
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_SPEACH);
+        $api->setMaximumRecords(0);
+
+    }
+
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位出力：境界値チェック
      */
     public function testSetMaximumRecordsByMeeting(): void
     {
+        //境界値
         $api = new KokkaiApi(KokkaiApi::API_MEETING);
         $api->setMaximumRecords(1);
         $this->assertEquals(1, $api->getMaximumRecords());
 
-        
-        $api->setMaximumRecords(100);
-        $this->assertEquals(100, $api->getMaximumRecords());
+        //境界値
+        $api->setMaximumRecords(10);
+        $this->assertEquals(10, $api->getMaximumRecords());
 
-        $this->expectException(Exception::class);
-        $api = new KokkaiApi(KokkaiApi::API_MEETING);
-        $api->setMaximumRecords(101);
-        $this->assertEquals(101, $api->getMaximumRecords());
     }
-
 
     /**
      * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位出力：境界値チェック
+     */
+    public function testSetMaximumRecordsByMeetingException1(): void
+    {
+        //例外試験
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING);
+        $api->setMaximumRecords(11);
+    }
+
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位出力：境界値チェック
+     */
+    public function testSetMaximumRecordsByMeetingException2(): void
+    {
+        //例外試験
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING);
+        $api->setMaximumRecords(0);
+    }
+
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位簡易出力：境界値チェック
      */
     public function testSetMaximumRecordsByMeetingList(): void
     {
@@ -83,12 +125,32 @@ class KokkaiApiTest extends TestCase
         
         $api->setMaximumRecords(100);
         $this->assertEquals(100, $api->getMaximumRecords());
+    }
+
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位簡易出力：境界値チェック
+     */
+    public function testSetMaximumRecordsByMeetingListException1(): void
+    {
 
         $this->expectException(Exception::class);
         $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
         $api->setMaximumRecords(101);
-        $this->assertEquals(101, $api->getMaximumRecords());
+
     }
 
+    /**
+     * 一回のリクエストで取得できるレコード数を、会議単位簡易出力、発言単位出力の場合は「1～100」、会議単位出力の場合は「1～10」の範囲で指定可能。
+     * 会議単位簡易出力：境界値チェック
+     */
+    public function testSetMaximumRecordsByMeetingListException2(): void
+    {
+
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setMaximumRecords(0);
+
+    }
 
 }
