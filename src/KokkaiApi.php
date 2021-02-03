@@ -149,10 +149,35 @@ class KokkaiApi
 
 
 
+    public string $nameOfMeeting = "";
+    public string $any = "";
+    public string $speaker = "";
+    private string $from = "0000-01-01";
+
+
+    public function getFrom(){
+        return $this->from;
+    }
+    public function setFrom(string $from){
+        if (preg_match('/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/', $from)){      
+            $this->from = $from;
+        } else {
+            throw new \Exception('$from is 0000-00-00 format!');
+        }
+    }
+
+    private string $until = "9999-12-31";
     
-
-
-
+    public function getUntil(){
+        return $this->until;
+    }
+    public function setUntil(string $until){
+        if (preg_match('/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/', $until)){      
+            $this->until = $until;
+        } else {
+            throw new \Exception('$until is 0000-00-00 format!');
+        }
+    }
     /**
      * コンストラクタ
      */

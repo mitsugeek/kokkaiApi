@@ -169,4 +169,69 @@ class KokkaiApiTest extends TestCase
 
     }
 
+
+    public function testFrom():void
+    {
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setFrom("0000-00-00");
+        $this->assertEquals("0000-00-00", $api->getFrom());
+
+        $api->setFrom("9999-12-31");
+        $this->assertEquals("9999-12-31", $api->getFrom());
+    }
+
+    public function testFromException(): void
+    {
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setFrom("0000000000");
+    }
+
+    public function testFromException2(): void
+    {   
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setFrom("2020/01/01");
+    }
+
+    public function testFromException3(): void
+    {   
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setFrom("01-01-01");
+    }
+
+    
+
+
+    public function testUntil():void
+    {
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setUntil("0000-00-00");
+        $this->assertEquals("0000-00-00", $api->getUntil());
+
+        $api->setUntil("9999-12-31");
+        $this->assertEquals("9999-12-31", $api->getUntil());
+    }
+
+    public function testUntilException(): void
+    {
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setUntil("0000000000");
+    }
+
+    public function testUntilException2(): void
+    {   
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setUntil("2020/01/01");
+    }
+
+    public function testUntilException3(): void
+    {   
+        $this->expectException(Exception::class);
+        $api = new KokkaiApi(KokkaiApi::API_MEETING_LIST);
+        $api->setUntil("01-01-01");
+    }
 }
